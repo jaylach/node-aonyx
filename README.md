@@ -75,7 +75,7 @@ Simple, yeah?
 When aonyx builds the service list that will be injected into a function, it will put null in place for services that are not found. These nulls will be replaced with values from
 our passed in arguments. In a hypothetical situation, aonyx may return the following service-injected array, where the second and fourth parameters couldn't be matched with a registered service...
 
-    [ { foo: 'bar' }, *null*, function() { ... }, *null* ]
+    [ { foo: 'bar' }, null, function() { ... }, null ]
 
 And the arguments passed to our inject method look something like this
 
@@ -83,7 +83,8 @@ And the arguments passed to our inject method look something like this
 
 The final array, which will be passed to our "injectee", would look something like this...
 
-    [ { foo: 'bar' }, *true*, function() { ... }, *{ some: 'other object' }* ]
+    # Notice the nulls were replaced by the values of the arguments supplied to aonyx.
+    [ { foo: 'bar' }, true, function() { ... }, { some: 'other object' } ]
 
 installation
 ------------
