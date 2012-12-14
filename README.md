@@ -43,7 +43,7 @@ Simple, right? There's more you can do with aonyx, though! For instance, aonyx w
 
 It doesn't even matter what order your parameters are in, aonyx will just put them all together for you correctly... well, kind of :) Here, let's explain this a bit better...
 
-When aonyx builds the service list it will put null in place for services that are not found. These nulls will be replaced with values in our args param. In a hypothetical situation,
+When aonyx builds the service list it will put null in place for services that are not found. These nulls will be replaced with values from our passed in arguments. In a hypothetical situation,
 aonyx may return the following service-injected array, where the second and fourth parameters couldn't be matched with a registered service...
 
     [ { foo: 'bar' }, null, function() { ... }, null ]
@@ -52,7 +52,7 @@ And the arguments passed to our inject method look something like this
 
     [ true, { some: 'other object' } ]
 
-The finally array that will be passed to Function.apply will look like this
+The final array, which will be passed to our "injectee", would look something like this...
 
     [ { foo: 'bar' }, true, function() { ... }, { some: 'other object' } ]
 
