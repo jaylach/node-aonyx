@@ -27,5 +27,5 @@
         "type": "git",
         "url": "https://github.com/jaylach/node-aonyx.git"
     },
-    "main": "lib/aonyx"
+    "main": "./lib/aonyx"
 }
