@@ -67,15 +67,15 @@ right when you have the response object handy. Luckily for us, aonyx provides a 
 
 What's happening here is we are first creating our injector for our route handler method. We are then defining a resolver method which will be called when aonyx finds a parameter
 for which it can't resolve. In our resolver method we're saying "If you're asking for a $response service, take this response object.. if not, return null". You need to always return
-null from your resolver if you also can't resolve the requested service. This makes it so aonyx can continue to properly merge our service resolutions with our arguments.
+null from your resolver if you can't resolve the requested service. This makes it so aonyx can continue to properly merge our service resolutions with our arguments.
 
 Simple, yeah?
 
 ##### A note about merging service injections and arguments
-When aonyx builds the service list it will put null in place for services that are not found. These nulls will be replaced with values from our passed in arguments. In a hypothetical situation,
-aonyx may return the following service-injected array, where the second and fourth parameters couldn't be matched with a registered service...
+When aonyx builds the service list that will be injected into a function, it will put null in place for services that are not found. These nulls will be replaced with values from
+our passed in arguments. In a hypothetical situation, aonyx may return the following service-injected array, where the second and fourth parameters couldn't be matched with a registered service...
 
-    [ { foo: 'bar' }, null, function() { ... }, null ]
+    [ { foo: 'bar' }, *null*, function() { ... }, *null* ]
 
 And the arguments passed to our inject method look something like this
 
@@ -83,7 +83,7 @@ And the arguments passed to our inject method look something like this
 
 The final array, which will be passed to our "injectee", would look something like this...
 
-    [ { foo: 'bar' }, true, function() { ... }, { some: 'other object' } ]
+    [ { foo: 'bar' }, *true*, function() { ... }, *{ some: 'other object' }* ]
 
 installation
 ------------
