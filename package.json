@@ -1,0 +1,31 @@
+{
+    "name": "aonyx",
+    "description": "A small, light-weight, dependency injector for node.",
+    "version": "0.1.0",
+    "author": {
+        "name": "Jason LaChapelle",
+        "email": "jaylach@gmail.com"
+    },
+    "dependencies": {
+        "underscore": ">=1.4.3"
+    },
+    "devDependencies": {
+        "coffee-script": ">=1.4.0",
+        "mocha": ">=1.7.4",
+        "should": ">=1.2.1"
+    },
+    "keywords": [
+        "di",
+        "ioc",
+        "dependency",
+        "dependency injection",
+        "dependency injector",
+        "injection",
+        "injector"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jaylach/node-aonyx.git"
+    },
+    "main": "lib/aonyx"
+}
