@@ -38,6 +38,16 @@ describe 'Injector Tests', ->
     aonyx.register 'MyObject', { foo: 'bar' }
     aonyx.arguments(test, resolve).should.eql [{ foo: 'bar' }, 'myOtherObject' ]
 
+  it 'Should resolve unknown service requests and merge supplied arguments', ->
+    test = (myObject, myOtherObject, myLastObject) ->
+    resolve = (service) ->
+      result = null
+      result = service if service is 'myOtherObject'
+      return result
+
+    aonyx.register 'MyObject', { foo: 'bar' }
+    aonyx.arguments(test, 'lastObject', resolve).should.eql [{ foo: 'bar' }, 'myOtherObject', 'lastObject' ]
+
   it 'Should properly inject our services', ->
     test = (myObject, myFunction) ->
       return obj: myObject, fnc: myFunction()
