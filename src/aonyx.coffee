@@ -47,6 +47,20 @@ _mergeArguments = (services, args) ->
 #   Functions
 #
 
+_setPrototype = (value) ->
+  if not value
+    Function.prototype["injector"] = null
+    delete Function.prototype["injector"]
+
+    Function.prototype["inject"] = null
+    delete Function.prototype["inject"]
+  else
+    Function.prototype["injector"] = -> _injectServices(this)
+    Function.prototype["inject"] = (args...) ->
+      _injectServices(this).apply this, args
+
+  return
+
 # Determines if a service with the formatted name already exists
 _serviceExists = (name) ->
   name = _formatName name
@@ -163,6 +177,7 @@ Aonyx =
   params: _getParamList
   has: _serviceExists
   get: _getService
+  proto: _setPrototype
   remove: _removeService
   empty: _emptyServices
 

@@ -47,6 +47,26 @@ Simple, right? There's more you can do with aonyx, though! For instance, aonyx w
 
 It doesn't even matter what order your parameters are in, aonyx will just put them all together for you correctly... well, kind of :) There is more information about how aonyx merges service injections and argument lists.
 
+aonyx also provides the ability to add the 'injector' and 'inject' methods directly to the Function prototype. This is disabled by default, for obvious reasons, but can be turned on
+pretty easily. These are really just short hand for different approaches above. Here's an example of using the Function prototype methods...
+
+    aonyx = require 'aonyx'
+    aonyx.proto true # Enable the Function prototype methods. Call aonyx.proto false to remove them.
+
+    myFunction = (myService, someParam) ->
+        service = new myService()
+        console.log service.myMethod(someParam) # Will log "Yolo!"
+
+    # Doing the injection immediately
+    myFunction.inject('Yolo!')
+
+    # Using an injector, in case you need to defer execution (i.e: setting up a resolver, see below).
+    injector = myFunction.injector()
+
+    ...
+
+    injector('Yolo!')
+
 Now, what happens if you want to be able to resolve a service at resolution time? When might this be handy? Let's say you want to be able to inject the current http response object into a method.
 You can't just register a service that returns the response object as the response is different for each request. Ideally you'd be able to resolve a request for service at the time it's requested,
 right when you have the response object handy. Luckily for us, aonyx provides a way to do this. Take the following example...
@@ -62,6 +82,7 @@ right when you have the response object handy. Luckily for us, aonyx provides a 
 
     app.get '/my/route', (request, response, next) ->
         injector = aonyx.inject(routeHandler.myRouteHandler)
+
         injector.resolver (service) ->
             # NOTE: In order for service and argument merging to work, you must return
             # null from your resolver if you can't resolve the requested service.

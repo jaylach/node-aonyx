@@ -1,7 +1,7 @@
 {
     "name": "aonyx",
     "description": "A small, light-weight, dependency injector for node.",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "author": {
         "name": "Jason LaChapelle",
         "email": "jaylach@gmail.com"

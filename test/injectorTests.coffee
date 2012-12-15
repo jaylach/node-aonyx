@@ -2,7 +2,9 @@ aonyx = require '../lib/aonyx'
 require 'should'
 
 describe 'Injector Tests', ->
-  beforeEach -> aonyx.empty()
+  beforeEach ->
+    aonyx.empty()
+    aonyx.proto no
 
   it 'Should parse parameter list correctly', ->
     test = (one, two) ->
@@ -106,3 +108,36 @@ describe 'Injector Tests', ->
     aonyx.register 'MyFunction', -> return 'baz'
 
     aonyx.inject(test)('param').should.eql expected
+
+  it 'Should have a usable "injector" method added to Function.prototype', ->
+    test = (myObject, myParam, myFunction) ->
+      return obj: myObject, fnc: myFunction(), prm: myParam
+
+    aonyx.proto yes
+
+    expected =
+      obj: { foo: 'bar' }
+      fnc: 'baz'
+      prm: 'param'
+
+    aonyx.register 'MyObject', { foo: 'bar' }
+    aonyx.register 'MyFunction', -> return 'baz'
+
+    injector = test.injector()
+    injector('param').should.eql expected
+
+  it 'Should have a usable "inject" method added to Function.prototype', ->
+    test = (myObject, myParam, myFunction) ->
+      return obj: myObject, fnc: myFunction(), prm: myParam
+
+    aonyx.proto yes
+
+    expected =
+      obj: { foo: 'bar' }
+      fnc: 'baz'
+      prm: 'param'
+
+    aonyx.register 'MyObject', { foo: 'bar' }
+    aonyx.register 'MyFunction', -> return 'baz'
+
+    test.inject('param').should.eql expected
