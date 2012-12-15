@@ -100,7 +100,7 @@ it up to the consuming code to figure out what it wants and doesn't want.
 
 
 *Well, couldn't I just provide all the "services" as callback arguments?*
-> You sure could. In fact, that's the way most modules work. However while working on another project of mine, (otter)[https://github.com/jaylach/node-otter], I found I had a need
+> You sure could. In fact, that's the way most modules work. However while working on another project of mine, [otter](https://github.com/jaylach/node-otter), I found I had a need
 to allow my module users the ability request which services they wanted rather than just giving them everything as an argument list. There were a lot of different services callbacks
 could want and methods with long parameter lists are kind of ugly. So, aonyx was born.
 
