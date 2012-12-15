@@ -5,6 +5,10 @@ _aonyx is in beta state. There are still more features I wish to add and some re
 aonyx is a very simple, very small dependency manager/injector for node. It does *NOT* provide require-like functionality, instead it is designed to give developers a means of injecting
 "services" into functions based on their parameter names. This is not unlike what [AngularJS](http://angularjs.org) provides.
 
+installation
+------------
+    npm install aonyx
+
 using aonyx
 -----------
 Using aonyx is simple. You just need to follow a couple easy steps.
@@ -85,7 +89,3 @@ The final array, which will be passed to our "injectee", would look something li
 
     # Notice the nulls were replaced by the values of the arguments supplied to aonyx.
     [ { foo: 'bar' }, true, function() { ... }, { some: 'other object' } ]
-
-installation
-------------
-Because aonyx is still in the early alpha stages of development it has not yet been pushed to npm. this means that if you wish to use aonyx as it stands right now, you will need to download the source and install the module yourself. luckily, that's as easy as copying the aonyx folder into the node_modules folder of your project.
