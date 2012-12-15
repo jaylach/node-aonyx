@@ -6,13 +6,14 @@
         "name": "Jason LaChapelle",
         "email": "jaylach@gmail.com"
     },
+    "homepage": "https://github.com/jaylach/node-aonyx",
     "dependencies": {
-        "underscore": ">=1.4.3"
+        "underscore": "1.x.x"
     },
     "devDependencies": {
-        "coffee-script": ">=1.4.0",
-        "mocha": ">=1.7.4",
-        "should": ">=1.2.1"
+        "coffee-script": "1.4.x",
+        "mocha": "1.7.x",
+        "should": "1.2.x"
     },
     "keywords": [
         "di",
