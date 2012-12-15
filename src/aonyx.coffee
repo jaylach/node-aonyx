@@ -139,8 +139,8 @@ _argumentsFor = (method, args..., resolve=null) ->
 # the specified function. It will figure out the services to inject and
 # merge that array with any other arguments specified and then call our
 # method with the specified scope.
-_injectServices = (method, args...) ->
-  injector = ->
+_injectServices = (method) ->
+  injector = (args...) ->
     serviceList = _argumentsFor.call injector, method, args, injector.resolve
     method.apply this, serviceList
   injector.resolver = (resolve) ->

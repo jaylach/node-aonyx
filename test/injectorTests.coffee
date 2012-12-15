@@ -91,7 +91,7 @@ describe 'Injector Tests', ->
     aonyx.register 'MyObject', { foo: 'bar' }
     aonyx.register 'MyFunction', -> return 'baz'
 
-    aonyx.inject(test, 'param')().should.eql expected
+    aonyx.inject(test)('param').should.eql expected
 
   it 'Should properly merge our services and arguments (MIXED ORDER)', ->
     test = (myObject, myParam, myFunction) ->
@@ -105,4 +105,4 @@ describe 'Injector Tests', ->
     aonyx.register 'MyObject', { foo: 'bar' }
     aonyx.register 'MyFunction', -> return 'baz'
 
-    aonyx.inject(test, 'param')().should.eql expected
+    aonyx.inject(test)('param').should.eql expected

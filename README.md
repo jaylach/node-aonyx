@@ -39,7 +39,7 @@ Simple, right? There's more you can do with aonyx, though! For instance, aonyx w
         service = new myService()
         console.log service.myMethod(someParam) # Will log "Yolo!"
 
-    aonyx.inject(myFunction, 'Yolo!')()
+    aonyx.inject(myFunction)('Yolo!')
 
 It doesn't even matter what order your parameters are in, aonyx will just put them all together for you correctly... well, kind of :) There is more information about how aonyx merges service injections and argument lists.
 
