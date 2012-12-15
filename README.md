@@ -94,8 +94,8 @@ faqs
 ----
 
 *Why aonyx? Doesn't node already provide a dependency management system (require)?*
-> It sure does, and it's awesome. It does what it does really really well. With that said, aonyx was really designed for a different purpose. Aonyx's strength really comes from
-being able to provide module developers a way to give their users the ability to specificy exactly what they need at a given point, rather than giving them everything and then leaving
+> It sure does, and it's awesome. It does what it does really really well. With that said, aonyx was designed for a different purpose. Aonyx's strength comes from being able
+to provide module developers with a way to give their users the ability to specificy exactly what they need at a given point, rather than giving them everything and then leaving
 it up to the consuming code to figure out what it wants and doesn't want.
 
 
