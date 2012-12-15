@@ -89,3 +89,34 @@ The final array, which will be passed to our "injectee", would look something li
 
     # Notice the nulls were replaced by the values of the arguments supplied to aonyx.
     [ { foo: 'bar' }, true, function() { ... }, { some: 'other object' } ]
+
+faqs
+----
+
+*Why aonyx? Doesn't node already provide a dependency management system (require)?*
+> It sure does, and it's awesome. It does what it does really really well. With that said, aonyx was really designed for a different purpose. Aonyx's strength really comes from
+being able to provide module developers a way to give their users the ability to specificy exactly what they need at a given point, rather than giving them everything and then leaving
+it up to the consuming code to figure out what it wants and doesn't want.
+
+
+*Well, couldn't I just provide all the "services" as callback arguments?*
+> You sure could. In fact, that's the way most modules work. However while working on another project of mine, (otter)[https://github.com/jaylach/node-otter], I found I had a need
+to allow my module users the ability request which services they wanted rather than just giving them everything as an argument list. There were a lot of different services callbacks
+could want and methods with long parameter lists are kind of ugly. So, aonyx was born.
+
+*Can I use aonyx in my non-module application?*
+> Sure but it's probably not needed. In most cases you'll find that the tools node gives you out of the box do everything you need, and more.
+
+license
+-------
+©2012 Jason LaChapelle and available under the MIT license:
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom
+the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE
+AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
