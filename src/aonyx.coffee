@@ -4,10 +4,10 @@ _ = require 'underscore'
 #   Fields
 #
 
-PARAM_REGEX = /function.*(\((.*)\))/
+PARAM_REGEX = /^[\s\(]*function[^(]*\(([^)]*)\)/
+PARAM_CLEAN_REGEX = /\/\/.*?[\r\n]|\/\*(?:.|[\r\n])*?\*\//g
 
 _services = {}
-
 
 #
 #   Helpers
@@ -116,7 +116,8 @@ _getParamList = (method) ->
   match = PARAM_REGEX.exec methodString
   return params if not match? or match.length is 0
 
-  params = match[2].split(/\s*,\s*/)
+  temp = match[1].replace(PARAM_CLEAN_REGEX, '').replace(/\s+/g, '')
+  params = temp.split(',')
 
 # Gets an array of services that should be injected into the function.
 # These services are in the proper order (based on the parameter list
