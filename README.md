@@ -110,6 +110,26 @@ The final array, which will be passed to our "injectee", would look something li
 
     # Notice the nulls were replaced by the values of the arguments supplied to aonyx.
     [ { foo: 'bar' }, true, function() { ... }, { some: 'other object' } ]
+    
+##### What if I want to "new up" an injectable method?
+Because of the way JavaScript treats constructors, this is not as simple as it looks as first. Ideally, you would be able to just call aonyx.inject(myConstructor) and everything would work
+just fine. However, that's not the case. Since JavaScript doesn't play nice when applying/calling constructors, we had to implement a work around for this. This is only a temporary solution
+until we found one we like more.
+
+Now, let's show you how to do this...
+
+    # Let's assume MyClass and MyObject are already registered with aonyx and the
+    # constructor for MyClass is expecting MyObject to be injected into it. 
+    
+    # Note that myClass will be injected in and is a function that can be new'd up.
+    myFunction = (myClass) ->
+        instance = aonyx.inject(myClass, yes).call(myClass) # We want to keep our scope to our class
+        return instance.myObject
+        
+Note the second parameter on the inject method (false by default). This is telling aonyx that it should new up this method during the injection process. What this will return is a new MyClass object with
+the services requested in the constructor injected. You do not need to (and probably should not) "new up" the function returned by aonyx.inject. This is handled for you when you pass true
+as the second parameter to the inject function. 
+        
 
 faqs
 ----
