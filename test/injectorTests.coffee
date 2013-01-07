@@ -1,6 +1,10 @@
 aonyx = require '../lib/aonyx'
 require 'should'
 
+class TestClass
+  constructor: (@myObject) ->
+    #console.log @myObject
+
 describe 'Injector Tests', ->
   beforeEach ->
     aonyx.empty()
@@ -60,6 +64,19 @@ describe 'Injector Tests', ->
 
     aonyx.register 'MyObject', { foo: 'bar' }
     aonyx.register 'MyFunction', -> return 'baz'
+
+    aonyx.inject(test)().should.eql expected
+
+  it 'Should allow injected class to be new\'d up', ->
+    test = (myClass) ->
+      instance = aonyx.inject(myClass, yes).call myClass
+      return instance.myObject
+
+    aonyx.register 'MyClass', TestClass
+    aonyx.register 'MyObject', { my: 'object' }
+
+    expected =
+      my: 'object'
 
     aonyx.inject(test)().should.eql expected
 

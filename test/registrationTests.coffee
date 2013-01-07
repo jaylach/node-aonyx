@@ -1,6 +1,10 @@
 aonyx = require '../lib/aonyx'
 require 'should'
 
+class TestClass
+  constructor: (@myObject) ->
+    console.log @myObject
+
 describe 'Registration Tests', ->
   beforeEach -> aonyx.empty()
 
@@ -15,6 +19,10 @@ describe 'Registration Tests', ->
     aonyx.register 'MyFunction', fnc
     aonyx.has('MyFunction').should.equal yes
     aonyx.get('MyFunction').toString().should.equal fnc.toString()
+
+  it 'Should register a class as a service', ->
+    aonyx.register 'MyClass', TestClass
+    aonyx.has('MyClass').should.equal yes
 
   it 'Should remove a registered service', ->
     aonyx.register 'MyObject', { foo: 'bar' }

@@ -28,7 +28,7 @@ _serviceFor = (name, resolver) ->
     return null
 
   # TODO: Allow services to also support injection
-  service = _services[formattedName]
+  service = _services[formattedName].service
 
   return service
 
@@ -87,7 +87,7 @@ _getService = (name) ->
   name = _formatName name
   return null if not _serviceExists(name)
 
-  _services[name]
+  _services[name].service
 
 # Registers a service with aonyx
 _registerService = (name, service) ->
@@ -98,7 +98,8 @@ _registerService = (name, service) ->
   if not _.isObject(service) and not _.isFunction(service)
     throw new Error "You can only register an object or a function with aonyx!"
 
-  _services[formattedName] = service
+  _services[formattedName] =
+    service: service
 
 # Simply gets the list of parameter names from the method. These names
 # will be used to determine which services should be injected into the function
@@ -154,10 +155,21 @@ _argumentsFor = (method, args..., resolve=null) ->
 # the specified function. It will figure out the services to inject and
 # merge that array with any other arguments specified and then call our
 # method with the specified scope.
-_injectServices = (method) ->
+_injectServices = (method, shouldNew=no) ->
   injector = (args...) ->
     serviceList = _argumentsFor.call injector, method, args, injector.resolve
-    method.apply this, serviceList
+    return method.apply(this, serviceList) if not shouldNew
+
+    # If we want to new this up, do some fancy stuff
+    newMethod = ->
+      M = ->
+        _injectServices(method, no).call this
+
+      M.prototype = method.prototype
+      return new M()
+
+    return newMethod()
+
   injector.resolver = (resolve) ->
     injector.resolve = resolve
 
