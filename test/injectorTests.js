@@ -40,11 +40,11 @@ describe('Injector Tests', function() {
     var services = [ {}, null, {}, null, {} ]
     var args = [ true, 'foo', false, 42 ]
     var expected = [ {}, true, {}, 'foo', {}, false, 42 ]
-    aonyx.__mergeArguments(services, args).should.eql(expected);
+    aonyx._mergeArguments(services, args).should.eql(expected);
 
     args = [ true ]
     expected = [ {}, true, {}, null, {} ]
-    aonyx.__mergeArguments(services, args).should.eql(expected);
+    aonyx._mergeArguments(services, args).should.eql(expected);
   });
 
   it('Should resolve unknown service request', function() {
@@ -99,6 +99,25 @@ describe('Injector Tests', function() {
 
     aonyx.register('MyClass', TestClass);
     aonyx.register('MyObject', { my: 'object' });
+
+    var expected = {
+      my: 'object'
+    };
+
+    aonyx.inject(test)().should.eql(expected);
+  });
+
+  it('Should inject services into a service', function() {
+    var service = function(myObject) {
+      return myObject;
+    };
+
+    var test = function(testService) {
+      return testService();
+    };
+
+    aonyx.register('MyObject', { my: 'object' });
+    aonyx.register('TestService', service);
 
     var expected = {
       my: 'object'
@@ -221,5 +240,27 @@ describe('Injector Tests', function() {
     aonyx.register('MyFunction', function() { return 'baz'; });
 
     test.inject('param').should.eql(expected);
+  });
+
+  it('Should create new injector instance', function() {
+    var test = function(newObject) {
+      return {
+        obj: newObject
+      };
+    };
+
+    aonyx.register('MyObject', { foo: 'bar' });
+
+    var injector = aonyx.create();
+    injector.register('NewObject', { foo: 'baz' });
+
+    injector.has('NewObject').should.equal(true);
+    injector.has('MyObject').should.equal(false);
+
+    var expected = {
+      obj: { foo: 'baz' }
+    };
+
+    injector.inject(test)().should.eql(expected);
   });
 });
