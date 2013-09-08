@@ -15,6 +15,8 @@ Luckily the few minor changes are on a function that really dosen't need to be u
 * Changed aonyx.arguments to ayonx.args. Arguments is a reserved word, dumb of me to use it :)
 * The aonyx.args method signature now accepts an array as the second paramter. In v0.1 the method would parse out the first and last arguments and use the "middle" for it's argument array.
 * Can now create new, separate, instances of the aonyx injector through aonyx.create()
+    * Newly created instance are "sandboxed" and completely separate from the main aonyx sandbox
+* Experimental support for allowing services to have services injected 
 
 installation
 ------------
