@@ -5,6 +5,16 @@ _aonyx is in beta state. There are still more features I wish to add and some re
 aonyx is a very simple, very small dependency manager/injector for node. It does *NOT* provide require-like functionality, instead it is designed to give developers a means of injecting
 "services" into functions based on their parameter names. This is not unlike what [AngularJS](http://angularjs.org) provides.
 
+v0.2 changes
+------------
+Below is a list of changes made for release version 0.2 of aonyx. I have strived to keep the api the same as version 0.1 Unfortunately, there are a few minor spots where that was not possible. 
+Luckily the few minor changes are on a function that really dosen't need to be used outside of aonyx itself (arguments).
+
+* Rewrote in pure javascript. Various reasons, biggest being wanted to clean up my development process.
+* Incorporated (esprima)[http://esprima.org/] for argument parsing. No more regular expressions!
+* Changed aonyx.arguments to ayonx.args. Arguments is a reserved word, dumb of me to use it :)
+* The aonyx.args method signature now accepts an array as the second paramter. In v0.1 the method would parse out the first and last arguments and use the "middle" for it's argument array.
+
 installation
 ------------
     npm install aonyx
