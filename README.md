@@ -11,7 +11,7 @@ Below is a list of changes made for release version 0.2 of aonyx. I have strived
 Luckily the few minor changes are on a function that really dosen't need to be used outside of aonyx itself (arguments).
 
 * Rewrote in pure javascript. Various reasons, biggest being wanted to clean up my development process.
-* Incorporated (esprima)[http://esprima.org/] for argument parsing. No more regular expressions!
+* Incorporated [esprima](http://esprima.org/) for argument parsing. No more regular expressions!
 * Changed aonyx.arguments to ayonx.args. Arguments is a reserved word, dumb of me to use it :)
 * The aonyx.args method signature now accepts an array as the second paramter. In v0.1 the method would parse out the first and last arguments and use the "middle" for it's argument array.
 
